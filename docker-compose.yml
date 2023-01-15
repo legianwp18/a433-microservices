@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  # membuat container untuk app
+  item-app:
+    image: legianmland/item-app
+    restart: always
+    container_name: item-app
+    depends_on:
+      - item-db #install db dulu
+    ports: 
+      - "80:8080" #port diexpost dengan port 80
+    # membuat container untuk database menggunakan mongo
+  item-db:
+    image: mongo:3
+    restart: always
+    container_name: item-db
+    volumes: 
+      - db:/data/db
+
+volumes:
+  db:
